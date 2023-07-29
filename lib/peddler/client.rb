@@ -119,6 +119,7 @@ module Peddler
 
       parser.new(res, encoding)
     rescue ::Excon::Error::HTTPStatus => e
+      p e.response
       handle_http_status_error(e)
     end
 
