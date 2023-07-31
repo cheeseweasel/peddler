@@ -114,11 +114,12 @@ module Peddler
     def run(&block)
       opts = build_options
       opts.store(:response_block, block) if block
-      pp headers
-      pp body
+      pp @headers
+      pp @body
+      pp opts
       res = post(opts)
-      pp res
       self.body = nil if res.status == 200
+      pp res.headers
 
       parser.new(res, encoding)
     rescue ::Excon::Error::HTTPStatus => e
